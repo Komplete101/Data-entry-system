@@ -270,7 +270,7 @@ class ADataEntry(tk.Frame):
             view.geometry("500x500")
 
 
-            invent = open("Inventory.csv")
+            invent = open("Inventory.csv",'r')
             Reader = csv.reader(invent)
             l1 =[]
             l1=next(Reader)
@@ -282,12 +282,12 @@ class ADataEntry(tk.Frame):
             trv['show'] = 'headings'
             trv['columns'] = l1
 
-            # for i in l1:
-            #     trv.column(i,width=100,anchor='c')
-            #     trv.heading(i, text=i)
-            # for da in data:
-            #     v=[r for r in da]
-            #     trv.insert('','end',iid=v[0],values=v)
+            for i in l1:
+                trv.column(i,width=100,anchor='c')
+                trv.heading(i, text=i)
+            for da in data:
+                v=[r for r in da]
+                trv.insert('','end',iid=v[0],values=v)
 
             view.mainloop()
         
