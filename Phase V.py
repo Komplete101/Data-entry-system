@@ -224,6 +224,30 @@ class ADataEntry(tk.Frame):
             reader = csv.reader(invent)
             t = []
             itemchose = nameentry.get()
+            newquant = quanity_spinbox.get()
+            Found = False
+            for row in reader:
+                if row[2] == itemchose:
+                    Found = True
+                    row[-1] = newquant
+                t.append(row)
+            invent.close()
+            if Found == True:
+                invent = open("Inventory.csv", "w+", newline=' ')
+                Writer = csv.writer(invent)
+                Writer.writerows(t)
+                invent.seek(0)
+                invent.close()
+            
+  
+        update = tk.Button(self, text="Update", font=("Helvetica", 15), command=update_quant)
+        update.place(x=550, y=450)
+
+        def delete_entry():
+            invent = open("Inventory.csv", "r")
+            reader = csv.reader(invent)
+            t = []
+            itemchose = nameentry.get()
             Found = False
             for row in reader:
                 if row[2] == itemchose:
@@ -238,28 +262,6 @@ class ADataEntry(tk.Frame):
                 invent.seek(0)
                 invent.close()
 
-        update = tk.Button(self, text="Update", font=("Helvetica", 15), command=update_quant)
-        update.place(x=550, y=450)
-
-        def delete_entry():
-            invent = open("Inventory.csv", "r")
-            reader = csv.reader(invent)
-            t = []
-            itemchose = nameentry.get()
-            newquant = quanity_spinbox.get()
-            Found = False
-            for row in reader:
-                if row[2] == itemchose:
-                    Found = True
-                    row[5] = newquant
-                t.append(row)
-            invent.close()
-            if Found == True:
-                invent = open("Inventory.csv", "w+", newline=' ')
-                Writer = csv.writer(invent)
-                Writer.writerows(t)
-                invent.seek(0)
-                invent.close()
 
         del_ent = tk.Button(self, text="Delete Entry", font=("Helvetica", 15), command=delete_entry)
         del_ent.place(x=750, y=450)
