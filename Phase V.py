@@ -227,7 +227,7 @@ class ADataEntry(tk.Frame):
             newquant = quanity_spinbox.get()
             Found = False
             for row in reader:
-                if row[2] == itemchose:
+                if row[-4] == itemchose:
                     Found = True
                     row[-1] = newquant
                 t.append(row)
@@ -250,7 +250,7 @@ class ADataEntry(tk.Frame):
             itemchose = nameentry.get()
             Found = False
             for row in reader:
-                if row[2] == itemchose:
+                if row[-4] == itemchose:
                     Found = True
                 else:
                     t.append(row)
@@ -269,7 +269,7 @@ class ADataEntry(tk.Frame):
         def view_csv():
             view = tk.Tk()
             view.title ("Current inventory")
-            view.geometry("500x500")
+            view.geometry("800x500")
 
 
             invent = open("Inventory.csv",'r')
@@ -287,9 +287,10 @@ class ADataEntry(tk.Frame):
             for i in l1:
                 trv.column(i,width=100,anchor='c')
                 trv.heading(i, text=i)
+                u=0
             for da in data:
                 v=[r for r in da]
-                trv.insert('','end',iid=v[0],values=v)
+                trv.insert('','end',iid=v[u],values=v)
 
             view.mainloop()
         
